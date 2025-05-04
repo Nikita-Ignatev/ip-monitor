@@ -1,0 +1,461 @@
+/* Dark Terminal Theme - Увеличен промежуток между индикаторами */
+
+:root {
+  --background-dark: #1e1e1e; /* Темный фон */
+  --foreground-light: #f8f8f2; /* Светлый текст */
+  --primary-accent: #bd93f9; /* Фиолетовый акцент (как в темах VS Code) */
+  --online-neon: #50fa7b; /* Неоновый зеленый для Online */
+  --offline-neon: #ff5555; /* Ярко-красный для Offline */
+  --border-dark: #383838; /* Темная граница */
+  --input-bg-dark: #282a36; /* Фон для полей ввода */
+  --button-bg-dark: #6272a4; /* Фон для кнопок (мягкий синий) */
+  --button-hover-dark: #44475a; /* Фон при наведении на кнопку */
+  --button-active-dark: #ff79c6; /* Яркий акцент при клике */
+  --info-bg-dark: #44475a; /* Фон для информационных блоков */
+  --info-border-dark: #6272a4; /* Граница для информационных блоков */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Menlo', 'Consolas', 'Lucida Console', 'Monaco', monospace; /* Моноширинный шрифт */
+  background: var(--background-dark);
+  color: var(--foreground-light);
+  padding: 20px;
+  line-height: 1.5;
+}
+
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--background-dark); /* Остается темным */
+  padding: 20px;
+  border: 1px solid var(--border-dark); /* Легкая граница */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* subtle shadow */
+}
+
+.header {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed var(--border-dark); /* Пунктирная граница */
+}
+
+h1 {
+  color: var(--primary-accent); /* Акцентный цвет для заголовка */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: normal; /* Без жирного шрифта */
+}
+h1 svg path {
+    fill: var(--primary-accent); /* Цвет иконки как акцент */
+}
+
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-container {
+  flex: 1;
+  min-width: 200px;
+  max-width: 350px;
+}
+
+#search {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-dark);
+  background-color: var(--input-bg-dark);
+  color: var(--foreground-light);
+  border-radius: 0; /* Квадратные углы */
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+#search::placeholder {
+    color: var(--gray); /* Чуть светлее серого */
+}
+
+#search:focus {
+  border-color: var(--primary-accent); /* Акцент при фокусе */
+  box-shadow: 0 0 5px var(--primary-accent); /* Свечение при фокусе */
+}
+
+#refresh {
+  padding: 8px 15px;
+  background: var(--button-bg-dark);
+  color: var(--foreground-light);
+  border: 1px solid var(--border-dark);
+  border-radius: 0; /* Квадратные углы */
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+#refresh:hover {
+  background: var(--button-hover-dark);
+  border-color: var(--primary-accent);
+}
+
+#refresh:active {
+  background: var(--button-active-dark);
+  border-color: var(--button-active-dark);
+  color: var(--background-dark); /* Темный текст при активации */
+}
+
+#refresh:disabled {
+  background: #44475a; /* Мягче фон */
+  border-color: #383838;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+.belaz-list-header {
+  display: grid;
+  grid-template-columns: 150px repeat(4, 1fr) 120px;
+  gap: 15px;
+  padding: 10px 8px;
+  background-color: var(--input-bg-dark); /* Темный фон заголовка */
+  font-weight: bold;
+  color: var(--primary-accent); /* Акцентный цвет заголовков колонок */
+  border-bottom: 1px dashed var(--border-dark);
+  font-size: 1em;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.belaz-name-header, .status-header, .control-header {
+  text-align: center;
+  text-transform: uppercase; /* Все заголовки колонок в верхнем регистре */
+}
+.belaz-name-header {
+    text-align: left;
+}
+
+.status-headers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px; /* <-- Увеличен gap для заголовков статусов */
+  flex-grow: 1;
+  justify-items: center;
+}
+
+
+.belaz-list {
+   padding: 0;
+   margin-top: 10px;
+}
+
+.belaz-list-item {
+  display: grid;
+  grid-template-columns: 150px repeat(4, 1fr) 120px;
+  gap: 15px;
+  background: var(--input-bg-dark); /* Темный фон элементов списка */
+  border-radius: 0;
+  padding: 10px 8px;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3); /* Внутренняя тень */
+  align-items: center;
+  min-height: 50px;
+  border: 1px solid var(--border-dark);
+  margin-bottom: 8px;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.belaz-list-item:hover {
+    background-color: #282a36; /* Чуть светлее при наведении */
+    border-color: var(--primary-accent); /* Акцентная граница при наведении */
+}
+
+.belaz-list-item:last-child {
+  margin-bottom: 0;
+}
+
+.belaz-name {
+  font-weight: normal;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--foreground-light);
+}
+
+.status-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px; /* <-- Увеличен gap для элементов списка статусов */
+  flex-grow: 1;
+  justify-items: center;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* already centers horizontally */
+  justify-content: center; /* already centers vertically */
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 0;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.status-item:hover {
+  background-color: #44475a; /* Фон при наведении на статус */
+}
+
+.status-label {
+ display: none;
+}
+
+.status-value {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Gap between indicator and text IF text was here */
+  font-size: 0.9em;
+  font-weight: bold; /* Индикаторы статуса жирным */
+  text-transform: uppercase;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%; /* Круглые индикаторы */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Легкое свечение */
+}
+
+.online .indicator {
+  background: var(--online-neon);
+  box-shadow: 0 0 8px var(--online-neon); /* Неоновое свечение */
+}
+
+.offline .indicator {
+  background: var(--offline-neon);
+   box-shadow: 0 0 8px var(--offline-neon); /* Неоновое свечение */
+}
+
+.online {
+    color: var(--online-neon);
+}
+
+.offline {
+    color: var(--offline-neon);
+}
+
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: var(--primary-accent); /* Акцентный цвет для загрузки */
+  grid-column: 1 / -1;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.error {
+  color: var(--offline-neon); /* Ярко-красный для ошибки */
+  font-weight: bold;
+}
+
+#ip-info {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: var(--info-bg-dark); /* Темный фон для инфо */
+  border: 1px dashed var(--info-border-dark); /* Пунктирная граница */
+  border-radius: 0;
+  font-size: 1em;
+  min-height: 40px;
+  text-align: center;
+  color: var(--foreground-light);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.update-info {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+  color: var(--gray); /* Мягкий серый для времени */
+  font-size: 0.85em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.refresh-icon {
+  animation: spin 1s linear infinite;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 60px;
+  justify-content: center;
+  align-items: center;
+}
+
+.control-button {
+  padding: 6px 12px;
+  border: 1px solid var(--border-dark);
+  border-radius: 0; /* Квадратные углы */
+  background: var(--button-bg-dark);
+  color: var(--foreground-light);
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  width: 100%;
+  text-align: center;
+  line-height: 1.3;
+  outline: none;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.belaz-list-item .control-button {
+     padding: 4px 8px;
+     font-size: 0.7em;
+     width: 100%;
+     border-color: var(--border-dark);
+     background-color: #44475a; /* Чуть темнее фон */
+     color: var(--foreground-light);
+}
+
+
+.control-button:hover {
+  background: var(--button-hover-dark);
+  border-color: var(--primary-accent);
+}
+
+.control-button:active {
+  background: var(--button-active-dark);
+  border-color: var(--button-active-dark);
+  color: var(--background-dark);
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+
+/* Медиа-запросы */
+@media (max-width: 992px) {
+  .belaz-list-header, .belaz-list-item {
+      grid-template-columns: 120px repeat(4, 1fr) 100px;
+      gap: 10px;
+  }
+   .belaz-name, .belaz-name-header {
+      width: auto;
+  }
+  .control-header, .buttons-container {
+      width: auto;
+  }
+   /* Media query specific status spacing and centering */
+  .status-headers, .status-container {
+      gap: 12px; /* Увеличен gap на средних экранах */
+      justify-items: center;
+  }
+   .status-item {
+      padding: 8px 6px;
+  }
+   .belaz-list-item .control-button {
+       padding: 3px 6px;
+       font-size: 0.6em;
+   }
+}
+
+@media (max-width: 600px) {
+  body {
+      padding: 10px;
+  }
+  .dashboard {
+      padding: 15px;
+  }
+  h1 {
+      font-size: 1.5rem;
+  }
+  .controls {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+  }
+  .search-container {
+      max-width: 100%;
+  }
+  #refresh {
+      width: 100%;
+      justify-content: center;
+  }
+
+  .belaz-list-header, .belaz-list-item {
+      grid-template-columns: 80px repeat(4, 1fr) 80px;
+      gap: 5px;
+      font-size: 0.9em;
+  }
+   .belaz-name, .belaz-name-header {
+      width: auto;
+       font-size: 0.9em;
+  }
+  .control-header, .buttons-container {
+      width: auto;
+  }
+  .status-header {
+      font-size: 0.8em;
+  }
+   /* Media query specific status spacing and centering */
+  .status-headers, .status-container {
+      gap: 8px; /* Увеличен gap на маленьких экранах */
+      justify-items: center;
+  }
+   .status-item {
+      padding: 6px 4px;
+  }
+  .status-value {
+      font-size: 0.8em;
+  }
+  .indicator {
+      width: 10px;
+      height: 10px;
+  }
+
+   .buttons-container {
+       gap: 3px;
+   }
+   .belaz-list-item .control-button {
+       padding: 2px 5px;
+       font-size: 0.6em;
+   }
+
+   #ip-info {
+       padding: 10px;
+       font-size: 0.9em;
+   }
+   .update-info {
+       font-size: 0.7em;
+       gap: 10px;
+   }
+}
